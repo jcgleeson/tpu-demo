@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  hello:
+    build: .
+    command: python bin/hello
+    volumes:
+      - .:/app:ro
+    tty: true
