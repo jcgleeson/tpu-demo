@@ -1,45 +1,17 @@
-# hello (Docker-enabled)
+# Python Project with uv and Dev Container
 
-A minimal Python "hello world" package with Docker support.
+This project uses uv for dependency management and a dev container for development.
 
-Quick start (build & run):
+## Setup
 
-Build the Docker image:
+1. Open the project in VS Code.
+2. Install the Dev Containers extension if not already installed.
+3. Use Command Palette: "Dev Containers: Reopen in Container"
 
-```bash
-# from project root (/Users/jamesgleeson/code/tpu)
-docker build -t hello:latest .
-```
+This will set up the environment with Python 3.12 and uv.
 
-Run the CLI in a container:
+## Running
 
-```bash
-docker run --rm hello:latest
-docker run --rm hello:latest Alice
-```
+- Run the script: `uv run python hello.py`
 
-Or using docker-compose:
-
-```bash
-docker-compose up --build
-# then from another terminal:
-# docker-compose run --rm hello python bin/hello Bob
-```
-
-Run tests inside the container (recommended to run locally):
-
-```bash
-# Build the image (if not already built)
-docker build -t hello:latest .
-
-# Run pytest inside the container
-docker run --rm hello:latest pytest -q
-```
-
-Local non-Docker usage
-
-```bash
-python -m pip install -e .[dev]
-pytest -q
-```
-
+The virtual environment is managed by uv and located in `.venv`.

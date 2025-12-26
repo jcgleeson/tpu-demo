@@ -1,0 +1,17 @@
+{
+    "name": "Python 3.12 with uv",
+    "image": "ghcr.io/astral-sh/uv:python3.12-bookworm-slim",
+    "postCreateCommand": "uv venv --clear",
+    "containerEnv": {"UV_LINK_MODE": "symlink"},
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "./.venv/bin/python"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.pylint"
+            ]
+        }
+    }
+}
