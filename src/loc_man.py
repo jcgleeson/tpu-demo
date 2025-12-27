@@ -1,10 +1,15 @@
 """Module providing a function some shortcuts for dataclasses."""
 from dataclasses import dataclass
 
-# Don't use the logging class when containerized. Use prints instead
+# NOTE: Don't use the logging class when containerized. Use prints instead
 # and let Docker Compose or Kubernetes handle the logging threads.
 # from logging import getLogger
 
+# NOTE: Shouldn't need pathlib from a contiainerized app as all paths are
+# relative to the container root.
+# import pathlib
+
+# TO-DO: setup linters and formatters.
 
 @dataclass
 class Location:
