@@ -1,5 +1,5 @@
 {
-    "name": "Python 3.12 with uv",
+    "name": "Python 3.12 Development Container",
     "image": "ghcr.io/astral-sh/uv:python3.12-bookworm-slim",
     "postCreateCommand": "uv venv --clear",
     "containerEnv": {"UV_LINK_MODE": "symlink"},
