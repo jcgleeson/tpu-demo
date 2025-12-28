@@ -1,6 +1,7 @@
 """Module providing a function some shortcuts for dataclasses."""
 from dataclasses import dataclass
 from datetime import datetime
+import json
 
 # NOTE: Don't use the logging class when containerized. Use prints instead
 # and let Docker Compose or Kubernetes handle the logging threads.
@@ -15,7 +16,7 @@ from datetime import datetime
 @dataclass
 class PowerEvent:
     """
-    Docstring for Location
+    Docstring for PowerEvent
     """
     name: str
     lat: float
@@ -24,7 +25,7 @@ class PowerEvent:
 
 class PowerEventManager:
     """
-    Docstring for LocationManager
+    Docstring for PowerEventManager
     """
     power_events: list[PowerEvent]
 
@@ -32,11 +33,11 @@ class PowerEventManager:
         self.power_events = []
 
     def add_power_event(self, power_event: PowerEvent) -> None:
-        """Add a location to the manager."""
+        """Add a power event to the manager."""
         return self.power_events.append(power_event)
 
     def get_power_event_by_name(self, name: str) -> PowerEvent | None:
-        """Get a location by its name."""
+        """Get a power event by its name (assumes names are unique)."""
         for locus in self.power_events:
             if locus.name == name:
                 return locus
@@ -51,7 +52,7 @@ class PowerEventManager:
         return [loc.lon for loc in self.power_events]
 
     def get_names(self) -> list[str]:
-        """Get a list of all location names."""
+        """Get a list of all power event names."""
         return [loc.name for loc in self.power_events]
 
 
