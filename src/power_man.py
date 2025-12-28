@@ -13,6 +13,10 @@ import json
 
 # TO-DO: setup linters and formatters.
 
+class JsonConversion(Exception):
+    """Custom exception for converting json to power event."""
+
+
 @dataclass
 class PowerEvent:
     """
@@ -35,6 +39,40 @@ class PowerEventManager:
     def add_power_event(self, power_event: PowerEvent) -> None:
         """Add a power event to the manager."""
         return self.power_events.append(power_event)
+
+    def add_power_event_json(self, power_event: str) -> None:
+        """
+        Docstring for add_power_event_json
+        
+        :param self: Description
+        :param power_event: Description
+        :type power_event: str
+        :return: Description
+        :rtype: bool
+        """
+        # NOTE: This exception handling is demonstrational. Normally would exclude and let
+        # the api service handle the schema guarantees.
+        try:
+            # attempt to create a dict of the input json str.
+            pow_event_dict = json.loads(power_event)
+            if "name" not in pow_event_dict:
+                raise JsonConversion("missing name from input json str!")
+
+            pow_event_dict.update({"time": datetime.now()})
+
+            return self.add_power_event(
+                PowerEvent(
+                    name=pow_event_dict["name"],
+                    lat=pow_event_dict["lat"],
+                    lon=pow_event_dict["lon"],
+                    time=pow_event_dict["time"]
+                )
+            )
+        except Exception as ex:
+            # NOTE: if you want to keep this handler, run it and force a few exceptions
+            # to get rid of the generic exception. Otherwise, this could mask other
+            # failures.
+            print(f"WARNING: EXCEPTION: {ex}")
 
     def get_power_event_by_name(self, name: str) -> PowerEvent | None:
         """Get a power event by its name (assumes names are unique)."""
