@@ -31,9 +31,9 @@ class PowerEventManager:
     def __init__(self):
         self.power_events = []
 
-    def add_power_event(self, location: PowerEvent) -> None:
+    def add_power_event(self, power_event: PowerEvent) -> None:
         """Add a location to the manager."""
-        return self.power_events.append(location)
+        return self.power_events.append(power_event)
 
     def get_power_event_by_name(self, name: str) -> PowerEvent | None:
         """Get a location by its name."""
