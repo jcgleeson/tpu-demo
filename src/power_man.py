@@ -26,38 +26,47 @@ class PowerEventManager:
     """
     Docstring for LocationManager
     """
-    locations: list[PowerEvent]
+    power_events: list[PowerEvent]
 
     def __init__(self):
-        self.locations = []
+        self.power_events = []
 
-    def add_location(self, location: PowerEvent) -> None:
+    def add_power_event(self, location: PowerEvent) -> None:
         """Add a location to the manager."""
-        return self.locations.append(location)
+        return self.power_events.append(location)
 
-    def get_location_by_name(self, name: str) -> PowerEvent | None:
+    def get_power_event_by_name(self, name: str) -> PowerEvent | None:
         """Get a location by its name."""
-        for locus in self.locations:
+        for locus in self.power_events:
             if locus.name == name:
                 return locus
         return None
 
     def get_lattitudes(self) -> list[float]:
         """Get a list of all latitudes."""
-        return [loc.lat for loc in self.locations]
+        return [loc.lat for loc in self.power_events]
 
     def get_longitudes(self) -> list[float]:
         """Get a list of all longitudes."""
-        return [loc.lon for loc in self.locations]
+        return [loc.lon for loc in self.power_events]
 
     def get_names(self) -> list[str]:
         """Get a list of all location names."""
-        return [loc.name for loc in self.locations]
+        return [loc.name for loc in self.power_events]
 
 
 if __name__ == "__main__":
-    loc_manager = PowerEventManager()
-    loc_manager.add_location(PowerEvent(name="New York", lat=40.7128, lon=-74.0060))
-    loc_manager.add_location(PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437))
-    for loc in loc_manager.locations:
-        print(f"Location: {loc.name}, Latitude: {loc.lat}, Longitude: {loc.lon}")
+    power_manager = PowerEventManager()
+    power_manager.add_power_event(
+        PowerEvent(name="New York", lat=40.7128, lon=-74.0060, time=datetime.now())
+    )
+    power_manager.add_power_event(
+        PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437, time=datetime.now())
+    )
+    for pow_event in power_manager.power_events:
+        print(f"""
+            Location: {pow_event.name},
+            Latitude: {pow_event.lat},
+            Longitude: {pow_event.lon},
+            Time: {pow_event.time.strftime("%Y-%m-%d %H:%M:%S")}"""
+        )

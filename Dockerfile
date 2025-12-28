@@ -33,7 +33,7 @@ ENV PATH="/app/.venv/bin:$PATH"
 # Reset the entrypoint, don't invoke `uv`
 ENTRYPOINT []
 
-# Switch to the non-root user
+# Switch to the non-root user now that the container is configured
 USER nonroot:nonroot
 
 # Command to run the application

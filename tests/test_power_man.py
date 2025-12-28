@@ -1,5 +1,5 @@
-"""Tests for loc_man module."""
-from power_man import PowerEventManager, PowerEvent
+"""Tests for power_man module."""
+from src.power_man import PowerEventManager, PowerEvent
 
 
 class TestLocMan:
@@ -12,12 +12,12 @@ class TestLocMan:
         
         :param self: Description
         """
-        loc_manager = PowerEventManager()
-        loc_manager.add_location(PowerEvent(name="New York", lat=40.7128, lon=-74.0060))
-        loc_manager.add_location(PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437))
-        assert loc_manager.get_location_by_name("New York") == PowerEvent(name="New York", lat=40.7128, lon=-74.0060)
-        assert loc_manager.get_location_by_name("Los Angeles") == PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437)
-        assert loc_manager.get_location_by_name("Chicago") is None
+        power_manager = PowerEventManager()
+        power_manager.add_power_event(PowerEvent(name="New York", lat=40.7128, lon=-74.0060))
+        power_manager.add_power_event(PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437))
+        assert power_manager.get_power_event_by_name("New York") == PowerEvent(name="New York", lat=40.7128, lon=-74.0060)
+        assert power_manager.get_power_event_by_name("Los Angeles") == PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437)
+        assert power_manager.get_power_event_by_name("Chicago") is None
 
     def test_get_lattitudes(self):
         """
@@ -25,10 +25,10 @@ class TestLocMan:
         
         :param self: Description
         """
-        loc_manager = PowerEventManager()
-        loc_manager.add_location(PowerEvent(name="New York", lat=40.7128, lon=-74.0060))
-        loc_manager.add_location(PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437))
-        assert loc_manager.get_lattitudes() == [40.7128, 34.0522]
+        power_manager = PowerEventManager()
+        power_manager.add_power_event(PowerEvent(name="New York", lat=40.7128, lon=-74.0060))
+        power_manager.add_power_event(PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437))
+        assert power_manager.get_lattitudes() == [40.7128, 34.0522]
 
     def test_get_longitudes(self):
         """
@@ -36,10 +36,10 @@ class TestLocMan:
         
         :param self: Description
         """
-        loc_manager = PowerEventManager()
-        loc_manager.add_location(PowerEvent(name="New York", lat=40.7128, lon=-74.0060))
-        loc_manager.add_location(PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437))
-        assert loc_manager.get_longitudes() == [-74.006, -118.2437]
+        power_manager = PowerEventManager()
+        power_manager.add_power_event(PowerEvent(name="New York", lat=40.7128, lon=-74.0060))
+        power_manager.add_power_event(PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437))
+        assert power_manager.get_longitudes() == [-74.006, -118.2437]
 
     def test_get_names(self):
         """
@@ -47,7 +47,7 @@ class TestLocMan:
         
         :param self: Description
         """
-        loc_manager = PowerEventManager()
-        loc_manager.add_location(PowerEvent(name="New York", lat=40.7128, lon=-74.0060))
-        loc_manager.add_location(PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437))
-        assert loc_manager.get_names() == ["New York", "Los Angeles"]
+        power_manager = PowerEventManager()
+        power_manager.add_power_event(PowerEvent(name="New York", lat=40.7128, lon=-74.0060))
+        power_manager.add_power_event(PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437))
+        assert power_manager.get_names() == ["New York", "Los Angeles"]
