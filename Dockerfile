@@ -19,25 +19,25 @@ ENV UV_NO_DEV=1
 ENV UV_TOOL_BIN_DIR=/usr/local/bin
 
 # Install the project's dependencies using the lockfile and settings
-RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=uv.lock,target=uv.lock \
-    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
-    uv sync --locked --no-install-project
+COPY --chown="nonroot:nonroot" uv.lock pyproject.toml /app/
+RUN uv sync --locked --no-install-project
+
+COPY --chown="nonroot:nonroot" ./src /app/src
+RUN uv sync --locked
 
 # Then, add the rest of the project source code and install it
 # Installing separately from its dependencies allows optimal layer caching
-COPY . /app
-RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --locked
+# RUN --mount=type=cache,target=/root/.cache/uv \
+#     uv sync --locked
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Reset the entrypoint, don't invoke `uv`
-ENTRYPOINT []
-
 # Switch to the non-root user now that the container is configured
 USER nonroot:nonroot
 
+# Reset the entrypoint, don't invoke `uv`
+ENTRYPOINT []
+
 # Command to run the application
-CMD ["python", "./src/loc_man.py"]
+CMD ["fastapi", "dev", "./src/main.py"]

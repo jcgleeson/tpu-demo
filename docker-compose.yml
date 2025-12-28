@@ -1,7 +1,9 @@
 services:
-  hello:
+  power-manager-api:
     build: .
-    command: python bin/hello
-    volumes:
-      - .:/app:ro
+    command: fastapi dev --host 0.0.0.0 ./src/main.py
+    # volumes:
+    #   - .:/app:ro
     tty: true
+    ports:
+      - "8000:8000"
