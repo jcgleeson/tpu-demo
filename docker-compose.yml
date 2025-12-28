@@ -7,3 +7,17 @@ services:
     tty: true
     ports:
       - "8000:8000"
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+        interval: 10s
+        retries: 5
+        start_period: 30s
+        timeout: 10s
+  
+  curler:
+    image: curlimages/curl:latest
+    depends_on:
+      power-manager-api:
+        condition: service_healthy
+    command: ["curl", "http://power-manager-api:8000/"]
+    tty: true
