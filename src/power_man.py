@@ -1,39 +1,41 @@
 """Module providing a function some shortcuts for dataclasses."""
 from dataclasses import dataclass
+from datetime import datetime
 
 # NOTE: Don't use the logging class when containerized. Use prints instead
 # and let Docker Compose or Kubernetes handle the logging threads.
 # from logging import getLogger
 
 # NOTE: Shouldn't need pathlib from a contiainerized app as all paths are
-# relative to the container root.
+# relative to the container root running in a unix file system.
 # import pathlib
 
 # TO-DO: setup linters and formatters.
 
 @dataclass
-class Location:
+class PowerEvent:
     """
     Docstring for Location
     """
     name: str
     lat: float
     lon: float
+    time: datetime
 
-class LocationManager:
+class PowerEventManager:
     """
     Docstring for LocationManager
     """
-    locations: list[Location]
+    locations: list[PowerEvent]
 
     def __init__(self):
         self.locations = []
 
-    def add_location(self, location: Location) -> None:
+    def add_location(self, location: PowerEvent) -> None:
         """Add a location to the manager."""
         return self.locations.append(location)
 
-    def get_location_by_name(self, name: str) -> Location | None:
+    def get_location_by_name(self, name: str) -> PowerEvent | None:
         """Get a location by its name."""
         for locus in self.locations:
             if locus.name == name:
@@ -54,8 +56,8 @@ class LocationManager:
 
 
 if __name__ == "__main__":
-    loc_manager = LocationManager()
-    loc_manager.add_location(Location(name="New York", lat=40.7128, lon=-74.0060))
-    loc_manager.add_location(Location(name="Los Angeles", lat=34.0522, lon=-118.2437))
+    loc_manager = PowerEventManager()
+    loc_manager.add_location(PowerEvent(name="New York", lat=40.7128, lon=-74.0060))
+    loc_manager.add_location(PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437))
     for loc in loc_manager.locations:
         print(f"Location: {loc.name}, Latitude: {loc.lat}, Longitude: {loc.lon}")
