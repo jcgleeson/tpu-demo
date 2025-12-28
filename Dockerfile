@@ -8,6 +8,9 @@ RUN groupadd --system --gid 999 nonroot \
 # Set the working directory in the container
 WORKDIR /app
 
+# TODO: bake in the unit, linting, and formatting checks as prerequisites
+# to the build process.
+
 # Copy from the cache instead of linking since it's a mounted volume
 ENV UV_LINK_MODE=copy
 # Omit development dependencies
