@@ -22,6 +22,7 @@ async def root():
     """
     Docstring for root
     """
+    print("Root endpoint called.")
     return {"message": "Root of Power Manager API"}
 
 @app.post("/add_event/")
