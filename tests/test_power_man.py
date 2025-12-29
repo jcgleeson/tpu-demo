@@ -70,6 +70,23 @@ class TestPowerMan(unittest.TestCase):
         )
         self.assertEqual(power_manager.get_names(), ["New York", "Los Angeles"])
 
+    def test_get_names_iter(self):
+        """
+        Docstring for test_get_names_iter
+
+        :param self: Description
+        """
+        power_manager = PowerEventManager()
+        power_manager.add_power_event(
+            PowerEvent(name="New York", lat=40.7128, lon=-74.0060, time=datetime.now())
+        )
+        power_manager.add_power_event(
+            PowerEvent(name="Los Angeles", lat=34.0522, lon=-118.2437, time=datetime.now())
+        )
+        iterator = power_manager.get_names_iter()
+        self.assertEqual(next(iterator), "New York")
+        self.assertEqual(next(iterator), "Los Angeles")
+
     def test_add_power_event_json(self):
         """
         Docstring for test_add_power_event_json

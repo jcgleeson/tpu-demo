@@ -11,7 +11,7 @@ import json
 # relative to the container root running in a unix file system.
 # import pathlib
 
-# TO-DO: setup linters and formatters.
+# TO-DO: setup linters, coverage checks, and formatters.
 
 class JsonConversion(Exception):
     """Custom exception for converting json to power event."""
@@ -31,6 +31,8 @@ class PowerEventManager:
     """
     Docstring for PowerEventManager
     """
+    # Could create a special list class and implement custom pre-sorting using
+    # collections.UserList if needed.
     power_events: list[PowerEvent]
 
     def __init__(self):
@@ -92,6 +94,11 @@ class PowerEventManager:
     def get_names(self) -> list[str]:
         """Get a list of all power event names."""
         return [loc.name for loc in self.power_events]
+
+    def get_names_iter(self) -> iter:
+        """Get an iterator of all power event names."""
+        for power_event in self.power_events:
+            yield power_event.name
 
 
 if __name__ == "__main__":
