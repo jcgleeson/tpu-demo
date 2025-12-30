@@ -8,10 +8,17 @@ This project uses uv for dependency management and a dev container for developme
 2. Install the Dev Containers extension if not already installed.
 3. Use Command Palette: "Dev Containers: Reopen in Container"
 
-This will set up the environment with Python 3.12 and uv.
+This will set up the environment with Python 3.12 and uv. The virtual environment is managed by uv and located in `.venv`.
 
-## Running
+## In Development
+- Open a terminal in vs code in order to interact with the development container: "Terminal -> New Terminal"
+- Run the unit tests before making any changes: `uv run pytest -v ./tests/`
+- Make changes, then re-run.
+- Run the REST API from inside the dev container: `uv run fastapi dev --host 0.0.0.0 ./src/main.py`
 
-- Run the script: `uv run python hello.py`
+## Testing in Docker Compose
 
-The virtual environment is managed by uv and located in `.venv`.
+- Build and run the REST API production container and a lightweight container with curl:
+```
+$ docker compose up --build --remove-orphans
+```
