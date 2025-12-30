@@ -1,7 +1,7 @@
 # Start from a small official astral Python image containing uv
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
-# Install curl with minimal dependencies
+# Install curl with minimal dependencies so we can provide a healthcheck
 RUN apt-get update && \
     apt-get install -y --no-install-recommends curl && \
     apt-get clean && \

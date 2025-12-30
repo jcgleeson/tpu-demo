@@ -19,5 +19,5 @@ services:
     depends_on:
       power-manager-api:
         condition: service_healthy
-    command: ["curl", "-X", "POST", "-H", "Content-Type: application/json", "-d", '{"name":"test event","lat":47.5,"lon":-118.5}', "http://power-manager-api:8000/add_event"]
+    command: ["curl", "-X", "POST", "http://power-manager-api:8000/add_event/", "-H", "Content-Type: application/json", "-d", '{"name":"test event","lat":47.5,"lon":-118.5}']
     tty: true
